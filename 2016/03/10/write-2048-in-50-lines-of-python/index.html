@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="2048," />
 
 
 
@@ -51,15 +51,21 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zlsun's blog">
-<meta property="og:url" content="https://zlsun.github.io/index.html">
+<meta name="description" content="代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#!/bin/python3from random import choicefrom os import systemfrom readchar import readchar, readke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="50行Python代码实现2048">
+<meta property="og:url" content="https://zlsun.github.io/2016/03/10/write-2048-in-50-lines-of-python/index.html">
 <meta property="og:site_name" content="zlsun's blog">
-<meta property="og:description">
+<meta property="og:description" content="代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#!/bin/python3from random import choicefrom os import systemfrom readchar import readchar, readke">
+<meta property="og:image" content="https://zlsun.github.io/images/write-2048-in-50-lines-of-python/1.png">
+<meta property="og:image" content="https://zlsun.github.io/images/write-2048-in-50-lines-of-python/2.png">
+<meta property="og:updated_time" content="2016-03-10T09:13:58.148Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zlsun's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="50行Python代码实现2048">
+<meta name="twitter:description" content="代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#!/bin/python3from random import choicefrom os import systemfrom readchar import readchar, readke">
 
 
 
@@ -71,7 +77,7 @@
   };
 </script>
 
-  <title> zlsun's blog </title>
+  <title> 50行Python代码实现2048 | zlsun's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -92,9 +98,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -181,15 +185,9 @@
       <div class="main-inner">
         <div id="content" class="content">
           
-  <section id="posts" class="posts-expand">
 
+  <div id="posts" class="posts-expand">
     
-
-    
-    
-
-    
-      
 
   
   
@@ -209,10 +207,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/03/10/write-2048-in-50-lines-of-python/" itemprop="url">
-                  50行Python代码实现2048
-                </a>
+                50行Python代码实现2048
               
             
           </h1>
@@ -267,275 +262,49 @@
       
 
       
-        
-          <span itemprop="articleBody">
-            
-              <p>代码如下：</p>
+        <span itemprop="articleBody"><p>代码如下：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/python3</span></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> choice</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> system</span><br><span class="line"><span class="keyword">from</span> readchar <span class="keyword">import</span> readchar, readkey</span><br><span class="line"><span class="keyword">from</span> colorama <span class="keyword">import</span> init</span><br><span class="line"><span class="keyword">from</span> termcolor <span class="keyword">import</span> colored</span><br><span class="line"></span><br><span class="line">N = <span class="number">4</span></span><br><span class="line">SEED = [<span class="number">2</span>] * <span class="number">9</span> + [<span class="number">4</span>]</span><br><span class="line">FGS = [<span class="string">'white'</span>, <span class="string">'green'</span>, <span class="string">'yellow'</span>, <span class="string">'blue'</span>, <span class="string">'cyan'</span>, <span class="string">'magenta'</span>, <span class="string">'red'</span>]</span><br><span class="line">TERM = (<span class="number">24</span>, <span class="number">80</span>)</span><br><span class="line">OFFSET = (TERM[<span class="number">0</span>] // <span class="number">2</span> - <span class="number">2</span>, TERM[<span class="number">1</span>] // <span class="number">2</span> - <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">pos          = <span class="keyword">lambda</span> y, x: <span class="string">'\x1b[%d;%dH'</span> % (y, x)</span><br><span class="line">color        = <span class="keyword">lambda</span> i: colored(<span class="string">'%4d'</span> % i, FGS[len(<span class="string">'&#123;:b&#125;'</span>.format(i)) % len(FGS)] <span class="keyword">if</span> i <span class="keyword">else</span> <span class="string">'grey'</span>)</span><br><span class="line">formatted    = <span class="keyword">lambda</span> m: <span class="string">'\n'</span>.join(pos(y, OFFSET[<span class="number">1</span>]) + <span class="string">' '</span>.join(color(i) <span class="keyword">for</span> i <span class="keyword">in</span> l) <span class="keyword">for</span> l, y <span class="keyword">in</span> zip(m, range(OFFSET[<span class="number">0</span>], OFFSET[<span class="number">0</span>] + <span class="number">4</span>)))</span><br><span class="line">combine      = <span class="keyword">lambda</span> l: ([l[<span class="number">0</span>] * <span class="number">2</span>] + combine(l[<span class="number">2</span>:]) <span class="keyword">if</span> l[<span class="number">0</span>] == l[<span class="number">1</span>] <span class="keyword">else</span> [l[<span class="number">0</span>]] + combine(l[<span class="number">1</span>:])) <span class="keyword">if</span> len(l) &gt;= <span class="number">2</span> <span class="keyword">else</span> l</span><br><span class="line">expand       = <span class="keyword">lambda</span> l: [l[i] <span class="keyword">if</span> i &lt; len(l) <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(N)]</span><br><span class="line">merge_left   = <span class="keyword">lambda</span> l: expand(combine(list(filter(bool, list(l)))))</span><br><span class="line">merge_right  = <span class="keyword">lambda</span> l: merge_left(l[::-<span class="number">1</span>])[::-<span class="number">1</span>]</span><br><span class="line">left         = <span class="keyword">lambda</span> m: list(map(merge_left, m))</span><br><span class="line">right        = <span class="keyword">lambda</span> m: list(map(merge_right, m))</span><br><span class="line">up           = <span class="keyword">lambda</span> m: list(map(list, zip(*left(zip(*m)))))</span><br><span class="line">down         = <span class="keyword">lambda</span> m: list(map(list, zip(*right(zip(*m)))))</span><br><span class="line">add_num_impl = <span class="keyword">lambda</span> m, p: m[p[<span class="number">0</span>]].__setitem__(p[<span class="number">1</span>], choice(SEED))</span><br><span class="line">add_num      = <span class="keyword">lambda</span> m: add_num_impl(m, choice([(x, y) <span class="keyword">for</span> x <span class="keyword">in</span> range(N) <span class="keyword">for</span> y <span class="keyword">in</span> range(N) <span class="keyword">if</span> <span class="keyword">not</span> m[x][y]]))</span><br><span class="line">win          = <span class="keyword">lambda</span> m: <span class="number">2048</span> <span class="keyword">in</span> sum(m, [])</span><br><span class="line">gameover     = <span class="keyword">lambda</span> m: all(m == t(m) <span class="keyword">for</span> t <span class="keyword">in</span> trans.values())</span><br><span class="line">draw         = <span class="keyword">lambda</span> m: system(<span class="string">"clear"</span>) <span class="keyword">or</span> print(formatted(m))</span><br><span class="line"></span><br><span class="line">trans = &#123;<span class="string">'a'</span>: left, <span class="string">'d'</span>: right, <span class="string">'w'</span>: up, <span class="string">'s'</span>: down&#125;</span><br><span class="line">m = [[<span class="number">0</span>] * N <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line">init()</span><br><span class="line">add_num(m)</span><br><span class="line">draw(m)</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        move = readkey()</span><br><span class="line">        <span class="keyword">if</span> move <span class="keyword">in</span> list(trans.keys()) + [<span class="string">'q'</span>]:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> move == <span class="string">'q'</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    n = trans[move](m)</span><br><span class="line">    <span class="keyword">if</span> n != m:</span><br><span class="line">        add_num(n)</span><br><span class="line">    m = n</span><br><span class="line">    draw(m)</span><br><span class="line">    <span class="keyword">if</span> win(m):</span><br><span class="line">        print(<span class="string">'\n'</span> + colored(<span class="string">'(^_^) You Win!'</span>.center(TERM[<span class="number">1</span>]), <span class="string">'yellow'</span>))</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">elif</span> gameover(m):</span><br><span class="line">        print(<span class="string">'\n'</span> + colored(<span class="string">'(＞﹏＜) Game Over!'</span>.center(TERM[<span class="number">1</span>]), <span class="string">'red'</span>))</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 <h2 id="截图">截图</h2><p><img src="/images/write-2048-in-50-lines-of-python/1.png" alt=""><br><img src="/images/write-2048-in-50-lines-of-python/2.png" alt=""></p>
-
-            
-          </span>
-        
+</span>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/10/analyse-cpp-hello-world/" itemprop="url">
-                  解析 C++ Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-03-10T16:01:00+08:00" content="2016-03-10">
-              2016-03-10
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/2048/" rel="tag">#2048</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/10/analyse-cpp-hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10/analyse-cpp-hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
       
 
       
-        
-          <span itemprop="articleBody">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <h2 id="Hello_world">Hello world</h2><p>Hello world 几乎是每个人学习一门语言时写的第一个程序。</p>
-<p>C++ 的 Hello world 是这样的：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world!"</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段代码虽然只有5行(不算上最后一个大括号的话)，但却隐藏着许多C++知识。接下来，让我们一行行的解析这段代码。</p>
-<h2 id="第一行">第一行</h2><p>第一行的意思是包含<code>&lt;iostream&gt;</code>这个头文件。 它本身是一段预处理指令。</p>
-<p>相关标准描述位于《ISO IEC 14882》（C++11标准文档 ）的 <code>16.2 Source file inclusion [cpp.include]</code>。</p>
-<p><code>&lt;...&gt;</code>是指在系统头文件路径中查找。可用以下命令显示系统头文件路径。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -E -x c++ - -v &lt; /dev/null</span><br><span class="line">clang++ -E -x c++ - -v &lt; /dev/null</span><br></pre></td></tr></table></figure>
-<h2 id="第二行">第二行</h2><p>第二行是引入<code>std</code>命名空间。</p>
-<p>相关标准描述位于《ISO IEC 14882》（C++11标准文档 ）的<code>7.3.4 Using directive [namespace.udir]</code>。</p>
-<p>在实际工程中，直接<code>using namespace std;</code>应被禁止，因为<code>std</code>命名空间这会污染当前命名空间。</p>
-<h2 id="第三行">第三行</h2><p>第三行定义了<code>main</code>函数，<code>main</code>函数是程序的入口。</p>
-<p>相关标准描述位于《ISO IEC 14882》的<code>3.6.1 Main function [basic.start.main]</code>。</p>
-<p>标准规定，<code>main</code>函数不可预定义，不可重载，允许的函数原型至少包括：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>;</span><br></pre></td></tr></table></figure>
-<h2 id="第四行">第四行</h2><p>这一行是包含知识点最多的一行。</p>
-<h3 id="C++_I/O模型">C++ I/O模型</h3><p><code>cout</code> 在<code>&lt;iostream&gt;</code>中只有声明：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> ostream <span class="built_in">cout</span>;</span><br></pre></td></tr></table></figure></p>
-<p>其类型为<code>ostream</code>，<code>ostream</code>是一个alias： <code>typedef basic_ostream&lt;char&gt; ostream</code>。</p>
-<p><code>basic_ostream</code>的继承结构如下：<br><img src="/images/analyse-cpp-hello-world/basic_ostream.png" alt=""></p>
-<h3 id="运算符重载">运算符重载</h3><p><code>cout &lt;&lt;</code>是C++的运算符重载语法。</p>
-<p>第四行用到了<code>&lt;ostream&gt;</code>中定义的两个<code>&lt;&lt;</code>运算符重载函数：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> traits&gt;</span><br><span class="line">basic_ostream&lt;<span class="keyword">char</span>,traits&gt;&amp; <span class="keyword">operator</span>&lt;&lt;(basic_ostream&lt;<span class="keyword">char</span>,traits&gt;&amp; out,</span><br><span class="line">     <span class="keyword">const</span> <span class="keyword">char</span>* s);</span><br><span class="line"></span><br><span class="line">basic_ostream&lt;charT,traits&gt;&amp; basic_ostream&lt;charT,traits&gt;::<span class="keyword">operator</span>&lt;&lt;</span><br><span class="line">    (basic_ostream&lt;charT,traits&gt;&amp;(*pf)(basic_ostream&lt;charT,traits&gt;&amp;));</span><br></pre></td></tr></table></figure>
-<p>这两个函数位于<code>std</code>命名空间下。</p>
-<p>这一行等价于：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">operator</span>&lt;&lt;(<span class="keyword">operator</span>&lt;&lt;(<span class="built_in">cout</span>, <span class="string">"Hello world"</span>), endl);</span><br></pre></td></tr></table></figure>
-<h3 id="ADL(Argument-dependent_name_lookup)">ADL(Argument-dependent name lookup)</h3><p>如果我们去掉第二行<code>using namespace std;</code>，那么这一行就得写成：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world"</span> &lt;&lt; <span class="built_in">std</span>::endl;</span><br></pre></td></tr></table></figure>
-<p>等价于：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">operator</span>&lt;&lt;(<span class="keyword">operator</span>&lt;&lt;(<span class="built_in">std</span>::<span class="built_in">cout</span>, <span class="string">"Hello world"</span>), <span class="built_in">std</span>::endl);</span><br></pre></td></tr></table></figure>
-<p>那么问题来了，我们知道这里用到的两个运算符重载函数位于<code>std</code>命名空间，我们没有引入<code>std</code> 命名空间，编译器是如何找到它们的呢？</p>
-<p>答案是ADL (Argument-dependent name lookup)。</p>
-<p>相关标准描述位于《ISO IEC 14882》的 <code>3.4.2 Argument-dependent name lookup [basic.lookup.argdep]</code>。</p>
-<p>ADL, 又称Koenig查找。当一个函数调用中被调用函数名前面没有类、命名空间等作用域限制时，则称之为无限定域的函数调用。<br>当编译器对其进行无限定域的函数调用名字查找时，如果一般的名字查找失败，会在函数参数的命名空间中继续查找。</p>
-<h3 id="I/O_manipulator">I/O manipulator</h3><p><code>std::endl</code>是一个 I/O manipulator。</p>
-<p>相关标准描述位于《ISO IEC 14882》的 <code>27.7.3.8 Standard basic_ostream manipulators [ostream.manip]</code></p>
-<p>其函数原型为：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> charT, <span class="keyword">class</span> traits&gt;</span><br><span class="line"><span class="built_in">std</span>::basic_ostream&lt;charT, traits&gt;&amp; endl(<span class="built_in">std</span>::basic_ostream&lt;charT, traits&gt;&amp; os);</span><br></pre></td></tr></table></figure>
-<p><code>cout &lt;&lt; endl</code> 会调用 <code>basic\_ostream&lt;charT, traits&gt;</code> 的运算符重载成员函数：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> basic_ostream&lt;charT, traits&gt; ostream_type;</span><br><span class="line">ostream_type&amp; <span class="keyword">operator</span>&lt;&lt;(ostream_type&amp; (*pf)(ostream_type&amp;))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> pf(*<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>std::endl</code>的定义是这样子的：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _CharT, <span class="keyword">typename</span> _Traits&gt;</span><br><span class="line"><span class="keyword">inline</span> basic_ostream&lt;_CharT, _Traits&gt;&amp; endl(basic_ostream&lt;_CharT, _Traits&gt;&amp; __os)</span><br><span class="line">&#123; <span class="keyword">return</span> flush(__os.put(__os.widen(<span class="string">'\n'</span>))); &#125;</span><br></pre></td></tr></table></figure>
-<p>经过两层函数调用，<code>cout &lt;&lt; endl</code> 变成了 <code>flush(cout.put(cout.widen(&#39;\n&#39;)))</code>。</p>
-<h2 id="第五行">第五行</h2><p>第五行的意思是将 0 这个值作为<code>main</code>函数的返回值返回。</p>
-<p>相关标准描述位于《ISO IEC 14882》的<code>3.6.1 Main function [basic.start.main]</code>的第5条。</p>
-<p>这条语句有两个作用：</p>
-<ol>
-<li>结束<code>main</code>函数。</li>
-<li>使用返回值调用<code>std::exit</code>。<br>根据标准，当这条语句位于<code>main</code>函数最末尾时可以省略。</li>
-</ol>
-
+              <a href="/2016/03/10/analyse-cpp-hello-world/" rel="next" title="解析 C++ Hello World">
+                <i class="fa fa-chevron-left"></i> 解析 C++ Hello World
+              </a>
             
-          </span>
-        
-      
-    </div>
+          </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/04/hello-world/" itemprop="url">
-                  Hello
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-11-04T16:47:01+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/04/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/04/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
       
 
       
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="World!">World!</h1>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
 
-  </section>
-
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
         </div>
@@ -544,6 +313,14 @@
 
 
         
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/10/write-2048-in-50-lines-of-python/"
+           data-title="50行Python代码实现2048" data-url="https://zlsun.github.io/2016/03/10/write-2048-in-50-lines-of-python/">
+      </div>
+    
+  </div>
+
 
       </div>
 
@@ -564,8 +341,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" src="/images/avatar.png" alt="zlsun" itemprop="image"/>
           <p class="site-author-name" itemprop="name">zlsun</p>
@@ -626,6 +412,23 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#截图"><span class="nav-number">1.</span> <span class="nav-text">截图</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
       
 
     </div>
@@ -713,6 +516,167 @@
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
 
   <script type="text/javascript" src="/js/bootstrap.js"></script>
 
