@@ -216,6 +216,157 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/07/use-list-initialzation-to-initial-linklist/" itemprop="url">
+                  使用列表初始化语法初始化链表
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-07T20:18:23+08:00" content="2016-04-07">
+              2016-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/07/use-list-initialzation-to-initial-linklist/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/use-list-initialzation-to-initial-linklist/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>已知链表节点定义如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> ListNode &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode* next;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ListNode(<span class="keyword">int</span> v, ListNode* n = <span class="literal">NULL</span>): val(v), next(n) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如何用 C++ 初始化出指定链表，如：1-&gt;2-&gt;3？</p>
+<h1 id="一般做法"><a href="#一般做法" class="headerlink" title="一般做法"></a>一般做法</h1><ol>
+<li><p>直接法，这种方法遇到长的链表会导致一行长度过长：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListNode* <span class="built_in">list</span> = <span class="keyword">new</span> ListNode(<span class="number">1</span>, <span class="keyword">new</span> ListNode(<span class="number">2</span>, <span class="keyword">new</span> ListNode(<span class="number">3</span>)));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分步法，缩短列宽，缺点是初始化长度为n的链表需要n行代码：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ListNode* <span class="built_in">list</span> = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">ListNode* node2 = <span class="built_in">list</span>-&gt;next = <span class="keyword">new</span> ListNode(<span class="number">2</span>);</span><br><span class="line">node2-&gt;next = <span class="keyword">new</span> ListNode(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>循环法，最通用的做法：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> values[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">ListNode* <span class="built_in">list</span> = <span class="keyword">new</span> ListNode(values[<span class="number">0</span>]);</span><br><span class="line">ListNode* cur = <span class="built_in">list</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">3</span>; ++i) &#123;</span><br><span class="line">    cur-&gt;next = <span class="keyword">new</span> ListNode(values[i]);</span><br><span class="line">    cur = cur-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以看出，这3种方法都比较啰嗦，如果使用 C++11 的列表初始化，可以简化很多。</p>
+<h1 id="列表list-初始化initialization"><a href="#列表list-初始化initialization" class="headerlink" title="列表list 初始化initialization"></a><ruby>列表<rt>list </rt></ruby><ruby>初始化<rt>initialization</rt></ruby></h1><p><a href="http://en.cppreference.com/w/cpp/language/list_initialization" target="_blank" rel="external">列表初始化</a>是C++11在旧语法的基础上提出的新语法。其提出是为了解决C++混乱的初始化语法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;              <span class="comment">// C风格的初始化</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">i</span><span class="params">(<span class="number">1</span>)</span></span>;               <span class="comment">// 构造初始化，与上面等价</span></span><br><span class="line"><span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;  <span class="comment">// 花括号初始化，用于初始化数组或者结构体</span></span><br><span class="line"><span class="keyword">struct</span> &#123; <span class="keyword">int</span> i; <span class="keyword">char</span> c; &#125; a = &#123;<span class="number">1</span>, <span class="string">'c'</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>有了列表初始化，上面的初始化可以统一写成：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i &#123;<span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> arr[] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">struct</span> &#123; <span class="keyword">int</span> i; <span class="keyword">char</span> c; &#125; a &#123;<span class="number">1</span>, <span class="string">'a'</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>STL 中的容器也支持这种初始化方法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; m &#123;&#123;<span class="string">'a'</span>, <span class="number">1</span>&#125;, &#123;<span class="string">'b'</span>, <span class="number">2</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p>这些容器是通过添加一个以<a href="http://en.cppreference.com/w/cpp/utility/initializer_list" target="_blank" rel="external"><code>std::initializer_list</code></a>为参数的构造函数实现的。</p>
+<p>以<code>std::vector</code>为例，其大致实现代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="built_in">vector</span> &#123;</span><br><span class="line">    ......</span><br><span class="line">    <span class="built_in">vector</span>(initializer_list&lt;T&gt; lst) &#123;</span><br><span class="line">        <span class="comment">// lst是一个容器，可以通过迭代器遍历出其中的元素，用于初始化vector</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="初始化链表"><a href="#初始化链表" class="headerlink" title="初始化链表"></a>初始化链表</h1><p>现在，让我们再来看下开头的问题。如何利用列表初始化语法初始化链表呢？</p>
+<p>可以直接这样做：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListNode* <span class="built_in">list</span> &#123;<span class="number">1</span>, <span class="keyword">new</span> ListNode &#123;<span class="number">2</span>, <span class="keyword">new</span> ListNode &#123;<span class="number">3</span>&#125;&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p>但是这样，跟上面的方法 1 几乎是一样的，初始化语句中有许多冗余的<code>new ListNode</code>。</p>
+<p>如何去掉<code>new ListNode</code>呢？</p>
+<p>可以使用一个辅助类<code>ListBuilder</code>把<code>new ListNode</code>“包”起来：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> ListBuilder &#123;</span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    ListNode* p;</span><br><span class="line">    ListBuilder(ListNode* p = <span class="literal">nullptr</span>): p(p) &#123;&#125;</span><br><span class="line">    ListBuilder(<span class="keyword">int</span> d, ListBuilder b = ListBuilder())</span><br><span class="line">        : p(<span class="keyword">new</span> ListNode(d, b.p)) &#123;&#125;</span><br><span class="line">    <span class="keyword">operator</span> ListNode* () <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>用法是这样：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListNode* <span class="built_in">list</span> = ListBuilder &#123;<span class="number">1</span>, &#123;<span class="number">2</span>, &#123;<span class="number">3</span>&#125;&#125;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>当编译器遇到 <code>ListBuilder {1, {2, {3}}}</code> 时，认识到这是一个列表初始化，<br>会在 ListBuilder的构造函数中寻找匹配函数签名<code>(int, ...)</code>的函数。</p>
+<figure class="highlight cpp"><figcaption><span>ListBuilder(int d, ListBuilder b = ListBuilder()) ``` 被匹配到。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`&#123;<span class="number">1</span>, &#123;<span class="number">2</span>, &#123;<span class="number">3</span>&#125;&#125;&#125;`中的`<span class="number">1</span>`被用于初始化参数`d`,`&#123;<span class="number">2</span>, &#123;<span class="number">3</span>&#125;&#125;`被用于初始化参数`b`。</span><br><span class="line"></span><br><span class="line">因为`b`也是`ListBuilder`，上述过程会递归地进行下去，直到遇到`&#123;<span class="number">3</span>&#125;`，递归终止。</span><br><span class="line"></span><br><span class="line">最后，`ListBuilder &#123;<span class="number">1</span>, &#123;<span class="number">2</span>, &#123;<span class="number">3</span>&#125;&#125;&#125;`初始化完成，得到一个`ListBuilder`实例，将它赋值给`ListNode* <span class="built_in">list</span>`。</span><br><span class="line"></span><br><span class="line">为了实现从`ListBuilder`到`ListNode`的转换，需要类型操作符重载：</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">    <span class="keyword">operator</span> ListNode* () <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><p>已知二叉树节点定义如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> TreeNode &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x, TreeNode* l = <span class="literal">nullptr</span>, TreeNode* r = <span class="literal">nullptr</span>)</span><br><span class="line">        : val(x), left(l), right(r) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如何用 C++ 初始化出二叉树？</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/04/implement-foreach-in-3-lines/" itemprop="url">
                   3 行 C++ 代码实现 foreach
                 </a>
@@ -789,7 +940,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
