@@ -773,7 +773,7 @@
 <p>相关标准描述位于《ISO IEC 14882》的 <code>27.7.3.8 Standard basic_ostream manipulators [ostream.manip]</code></p>
 <p>其函数原型为：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> charT, <span class="keyword">class</span> traits&gt;</span><br><span class="line"><span class="built_in">std</span>::basic_ostream&lt;charT, traits&gt;&amp; endl(<span class="built_in">std</span>::basic_ostream&lt;charT, traits&gt;&amp; os);</span><br></pre></td></tr></table></figure>
-<p><code>cout &lt;&lt; endl</code> 会调用 <code>basic\_ostream&lt;charT, traits&gt;</code> 的运算符重载成员函数：</p>
+<p><code>cout &lt;&lt; endl</code> 会调用 <code>basic_ostream&lt;charT, traits&gt;</code> 的运算符重载成员函数：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> basic_ostream&lt;charT, traits&gt; ostream_type;</span><br><span class="line">ostream_type&amp; <span class="keyword">operator</span>&lt;&lt;(ostream_type&amp; (*pf)(ostream_type&amp;))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> pf(*<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>std::endl</code>的定义是这样子的：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _CharT, <span class="keyword">typename</span> _Traits&gt;</span><br><span class="line"><span class="keyword">inline</span> basic_ostream&lt;_CharT, _Traits&gt;&amp; endl(basic_ostream&lt;_CharT, _Traits&gt;&amp; __os)</span><br><span class="line">&#123; <span class="keyword">return</span> flush(__os.put(__os.widen(<span class="string">'\n'</span>))); &#125;</span><br></pre></td></tr></table></figure>
@@ -783,8 +783,9 @@
 <p>这条语句有两个作用：</p>
 <ol>
 <li>结束<code>main</code>函数。</li>
-<li>使用返回值调用<code>std::exit</code>。<br>根据标准，当这条语句位于<code>main</code>函数最末尾时可以省略。</li>
+<li>使用返回值调用<code>std::exit</code>。</li>
 </ol>
+<p>根据标准，当这条语句位于<code>main</code>函数最末尾时可以省略。</p>
 
           
         
